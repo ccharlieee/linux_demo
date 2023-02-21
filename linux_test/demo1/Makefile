@@ -1,8 +1,10 @@
+KERNELDIR := /home/edu/work/work/git/linux_demo/linux_kernel
+CURRENT_PATH := $(shell pwd)
 obj-m := driver.o
-KERNELDIR = /home/edu/work/linux
-PWD = $(shell pwd)
-default:
-	$(MAKE) -C $(KERNELDIR) M=`pwd`
-	rm -rf *.order *.mod.* *.o *.symvers
+
+build: kernel_modules
+
+kernel_modules:
+	$(MAKE) -C $(KERNELDIR) M=$(CURRENT_PATH) modules
 clean:
-	rm -rf *.ko
+	$(MAKE) -C $(KERNELDIR) M=$(CURRENT_PATH) clean

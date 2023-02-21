@@ -1,1 +1,0 @@
-cmd_/home/edu/work/linux_test/demo1/driver.ko := arm-poky-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/edu/work/linux_test/demo1/driver.ko /home/edu/work/linux_test/demo1/driver.o /home/edu/work/linux_test/demo1/driver.mod.o
