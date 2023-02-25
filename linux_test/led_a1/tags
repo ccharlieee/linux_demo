@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CCM_CCGR5_BASE	led.c	13;"	d	file:
+CURRENT_PATH	Makefile	/^CURRENT_PATH := $(shell pwd)$/;"	m
+GPIO5_DR	led.c	/^static void __iomem *GPIO5_DR;$/;"	v	file:
+GPIO5_DR_base	led.c	16;"	d	file:
+GPIO5_GDIR	led.c	/^static void __iomem *GPIO5_GDIR;$/;"	v	file:
+GPIO5_GDIR_base	led.c	17;"	d	file:
+IMX6U_CCM_CCGR5	led.c	/^static void __iomem *IMX6U_CCM_CCGR5;$/;"	v	file:
+KERNELDIR	Makefile	/^KERNELDIR := \/home\/edu\/work\/git\/linux_demo\/kernel$/;"	m
+LED_MAJOR	led.c	9;"	d	file:
+LED_NAME	led.c	10;"	d	file:
+SW_MUX_CTL_PAD_SNVS_TAMPER1	led.c	/^static void __iomem *SW_MUX_CTL_PAD_SNVS_TAMPER1;$/;"	v	file:
+SW_MUX_CTL_PAD_SNVS_TAMPER1_base	led.c	14;"	d	file:
+SW_PAD_CTL_PAD_SNVS_TAMPER1	led.c	/^static void __iomem *SW_PAD_CTL_PAD_SNVS_TAMPER1;$/;"	v	file:
+SW_PAD_CTL_PAD_SNVS_TAMPER1_base	led.c	15;"	d	file:
+__this_module	led.mod.c	/^__visible struct module __this_module$/;"	v	typeref:struct:module
+__used	led.mod.c	/^__used$/;"	v	file:
+__used	led.mod.c	/^__used$/;"	v	typeref:struct:____versions	file:
+led_exit	led.c	/^module_exit(led_exit);$/;"	v
+led_exit	led.c	/^static void __exit led_exit(void)$/;"	f	file:	signature:(void)
+led_fops	led.c	/^static struct file_operations led_fops={$/;"	v	typeref:struct:file_operations	file:
+led_init	led.c	/^module_init(led_init);$/;"	v
+led_init	led.c	/^static int __init led_init(void)$/;"	f	file:	signature:(void)
+led_open	led.c	/^static int led_open (struct inode *pinode, struct file *pfile)$/;"	f	file:	signature:(struct inode *pinode, struct file *pfile)
+led_release	led.c	/^static int led_release (struct inode *pinode, struct file *pfile){$/;"	f	file:	signature:(struct inode *pinode, struct file *pfile)
+led_write	led.c	/^static ssize_t led_write (struct file *pfile, const char __user *pbuf, size_t count,loff_t *off){$/;"	f	file:	signature:(struct file *pfile, const char __user *pbuf, size_t count,loff_t *off)
+obj-m	Makefile	/^obj-m := led.o$/;"	m

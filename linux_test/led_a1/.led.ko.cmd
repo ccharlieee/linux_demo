@@ -1,0 +1,1 @@
+cmd_/home/edu/tools/nfs/rootfs/demo/led_a1/led.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/edu/tools/nfs/rootfs/demo/led_a1/led.ko /home/edu/tools/nfs/rootfs/demo/led_a1/led.o /home/edu/tools/nfs/rootfs/demo/led_a1/led.mod.o
