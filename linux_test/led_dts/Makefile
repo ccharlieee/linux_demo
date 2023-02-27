@@ -1,4 +1,4 @@
-KERNELDIR := /home/edu/work/work/git/linux_demo/kernel
+KERNELDIR := /home/edu/work/git/linux_demo/kernel
 CURRENT_PATH := $(shell pwd)
 
 obj-m := led_dts.o
