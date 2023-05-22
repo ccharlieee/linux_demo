@@ -1,2 +1,2 @@
-/home/edu/tools/nfs/rootfs/demo/led_a1/led.ko
-/home/edu/tools/nfs/rootfs/demo/led_a1/led.o
+/home/edu/work/git/linux_demo/linux_test/led_a1/led.ko
+/home/edu/work/git/linux_demo/linux_test/led_a1/led.o

@@ -59856,7 +59856,7 @@
 8096b73c t __irf_start
 8096b73c T __security_initcall_end
 8096b73c T __security_initcall_start
-8096b7c1 t __irf_end
+8096b7c2 t __irf_end
 8096b7c8 T __initramfs_size
 8096c000 D __per_cpu_load
 8096c000 D __per_cpu_start

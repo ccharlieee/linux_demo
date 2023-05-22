@@ -1,0 +1,12 @@
+KERNELDIR := /home/edu/work/git/linux_demo/kernel
+CURRENT_PATH := $(shell pwd)
+
+obj-m := gpio_beep.o
+
+build: kernel_modules
+
+kernel_modules:
+	$(MAKE) -C $(KERNELDIR) M=$(CURRENT_PATH) modules
+
+clean:
+	$(MAKE) -C $(KERNELDIR) M=$(CURRENT_PATH) clean

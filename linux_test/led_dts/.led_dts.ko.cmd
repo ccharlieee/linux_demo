@@ -1,0 +1,1 @@
+cmd_/home/edu/work/git/linux_demo/linux_test/led_dts/led_dts.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/edu/work/git/linux_demo/linux_test/led_dts/led_dts.ko /home/edu/work/git/linux_demo/linux_test/led_dts/led_dts.o /home/edu/work/git/linux_demo/linux_test/led_dts/led_dts.mod.o

@@ -1,4 +1,4 @@
-cmd_scripts/kconfig/lxdialog/checklist.o := gcc -Wp,-MD,scripts/kconfig/lxdialog/.checklist.o.d -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89   -D_GNU_SOURCE -I/usr/include/ncursesw -DCURSES_LOC="<ncurses.h>" -DNCURSES_WIDECHAR=1 -DLOCALE   -c -o scripts/kconfig/lxdialog/checklist.o scripts/kconfig/lxdialog/checklist.c
+cmd_scripts/kconfig/lxdialog/checklist.o := gcc -Wp,-MD,scripts/kconfig/lxdialog/.checklist.o.d -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89   -D_GNU_SOURCE -DCURSES_LOC="<ncurses.h>" -DLOCALE   -c -o scripts/kconfig/lxdialog/checklist.o scripts/kconfig/lxdialog/checklist.c
 
 source_scripts/kconfig/lxdialog/checklist.o := scripts/kconfig/lxdialog/checklist.c
 
@@ -55,8 +55,8 @@ deps_scripts/kconfig/lxdialog/checklist.o := \
   /usr/include/libintl.h \
   /usr/include/locale.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
-  /usr/include/ncursesw/ncurses.h \
-  /usr/include/ncursesw/ncurses_dll.h \
+  /usr/include/curses.h \
+  /usr/include/ncurses_dll.h \
   /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -69,9 +69,8 @@ deps_scripts/kconfig/lxdialog/checklist.o := \
   /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
   /usr/include/x86_64-linux-gnu/bits/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/stdio2.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
-  /usr/include/ncursesw/unctrl.h \
-  /usr/include/ncursesw/curses.h \
+  /usr/include/unctrl.h \
+  /usr/include/curses.h \
 
 scripts/kconfig/lxdialog/checklist.o: $(deps_scripts/kconfig/lxdialog/checklist.o)
 

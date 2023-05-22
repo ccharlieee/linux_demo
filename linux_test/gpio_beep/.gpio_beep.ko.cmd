@@ -1,0 +1,1 @@
+cmd_/home/edu/work/git/linux_demo/linux_test/gpio_beep/gpio_beep.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/edu/work/git/linux_demo/linux_test/gpio_beep/gpio_beep.ko /home/edu/work/git/linux_demo/linux_test/gpio_beep/gpio_beep.o /home/edu/work/git/linux_demo/linux_test/gpio_beep/gpio_beep.mod.o

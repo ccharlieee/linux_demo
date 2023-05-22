@@ -145,6 +145,30 @@
 			spi-max-frequency = <100000>;
 		};
 	};
+
+	alphaled {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "atkalpha-led";
+		status = "okay";
+		reg = <
+			0X020C407C 0x04
+			0X0229000C 0x04
+			0x02290050 0x04
+			0x020AC000 0x04
+			0x020AC004 0x04
+		>;
+	};
+
+	beep {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "atkalpha-beep";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_beep>;
+		beep-gpio = <&gpio5 1 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
 };
 
 &cpu0 {
@@ -565,6 +589,13 @@
 				MX6UL_PAD_LCD_RESET__WDOG1_WDOG_ANY    0x30b0
 			>;
 		};
+
+		pinctrl_beep: beepgrp {
+			fsl,pins = <
+				MX6ULL_PAD_SNVS_TAMPER1__GPIO5_IO01    0x10B0
+			>;
+		};
+
 	};
 };
 

@@ -8,19 +8,19 @@
 
 #define LED_MAJOR 200
 #define LED_NAME "LED"
-
-//物理地址  beep
-#define CCM_CCGR5_BASE (0X020C407C)
-#define SW_MUX_CTL_PAD_SNVS_TAMPER1_base (0X0229000C)
-#define SW_PAD_CTL_PAD_SNVS_TAMPER1_base (0x02290050)
-#define GPIO5_DR_base   (0x020AC000)
-#define GPIO5_GDIR_base (0x020AC004)
 /*  led  gpio3
 #define CCM_CCGR5_BASE (0X020C406C)
 #define SW_MUX_CTL_PAD_SNVS_TAMPER1_base (0X020E0068)
 #define SW_PAD_CTL_PAD_SNVS_TAMPER1_base (0X020E02F4)
 #define GPIO5_DR_base   (0X0209C000)
 #define GPIO5_GDIR_base (0X0209C004)*/
+//物理地址  beep
+#define CCM_CCGR5_BASE (0X020C407C)
+#define SW_MUX_CTL_PAD_SNVS_TAMPER1_base (0X0229000C) 
+#define SW_PAD_CTL_PAD_SNVS_TAMPER1_base (0x02290050) 
+#define GPIO5_DR_base   (0x020AC000)
+#define GPIO5_GDIR_base (0x020AC004)
+
 //虚拟地址
 static void __iomem *IMX6U_CCM_CCGR5;
 static void __iomem *SW_MUX_CTL_PAD_SNVS_TAMPER1;
@@ -83,10 +83,10 @@ static int __init led_init(void)
 //	val = readl(GPIO5_GDIR);
 //	val |= 1<<1;
 //	writel(val,GPIO5_GDIR);
-	
+/*	
 	val = readl(GPIO5_DR);
 	val &=~ (1<<1);
-	writel(val,GPIO5_DR);
+	writel(val,GPIO5_DR);*/
 	
 	
    printk(KERN_WARNING"L%d->%s()\n",__LINE__,__FUNCTION__);
