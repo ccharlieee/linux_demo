@@ -57,13 +57,13 @@ static ssize_t demo_write(struct file *pfile, const char __user *puser, size_t c
 	if(data == '0')
 		{
 			val = readl(GPIO5_DR);
-			val |= (1<<1);
+			val |= (1<<3);
 			writel(val,GPIO5_DR);	
 		}
 	else
 		{
 			val = readl(GPIO5_DR);
-	        val &=~ (1<<1);
+	        val &=~ (1<<3);
 	        writel(val,GPIO5_DR);
 		}	
 
@@ -116,10 +116,14 @@ static int __init demo_module_init(void)
 	
 	val = readl(IMX6U_CCM_CCGR5);
 	val &= ~(3<<20);
-	val |= 3<<20;
+	val |= 3<<26;
 	writel(val,IMX6U_CCM_CCGR5);
 //	writel(val,GPIO5_GDIR);
-	writel(0X2,GPIO5_GDIR);
+
+	val = readl(GPIO1_GDIR);
+	val &= ~(1 << 3);
+	val |= (1 << 3); 
+	writel(val,GPIO5_GDIR);
 
 	
 	//初始化
@@ -131,7 +135,7 @@ static int __init demo_module_init(void)
 //	writel(val,GPIO5_GDIR);
 	
 	val = readl(GPIO5_DR);
-	val &=~ (1<<1);
+	val |= (1<<3);
 	writel(val,GPIO5_DR);
 
 return 0;
@@ -148,12 +152,17 @@ static void __exit demo_module_exit(void)
 	unregister_chrdev(major,DEVICE_NAME);
 	device_destroy(demo_class,MKDEV(major,0));
 	class_destroy(demo_class);
+	
+	val = readl(GPIO5_DR);
+	val |= (1<<3);
+	writel(val,GPIO5_DR);
 
 	iounmap(IMX6U_CCM_CCGR5);
 	iounmap(SW_MUX_CTL_PAD_SNVS_TAMPER1);
 	iounmap(SW_PAD_CTL_PAD_SNVS_TAMPER1);
 	iounmap(GPIO5_DR);
 	iounmap(GPIO5_GDIR);
+
 }
 
 module_init(demo_module_init);

@@ -152,11 +152,11 @@
 		compatible = "atkalpha-led";
 		status = "okay";
 		reg = <
-			0X020C407C 0x04
-			0X0229000C 0x04
-			0x02290050 0x04
-			0x020AC000 0x04
-			0x020AC004 0x04
+			0X020C406C 0x04
+			0X020E0068 0x04
+			0X020E02F4 0x04
+			0X0209C000 0x04
+			0X0209C004 0x04
 		>;
 	};
 
@@ -169,6 +169,16 @@
 		beep-gpio = <&gpio5 1 GPIO_ACTIVE_HIGH>;
 		status = "okay";
 	};
+	led {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "atkalpha-led";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_led>;
+		beep-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>;
+		status = "okay";
+	};
+
 };
 
 &cpu0 {
@@ -465,7 +475,7 @@
 			fsl,pins = <
 				MX6UL_PAD_GPIO1_IO01__GPIO1_IO01	0xb0
 				MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0xb0
-				MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0
+			//	MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0
 				MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0xb0
 			>;
 		};
@@ -593,6 +603,11 @@
 		pinctrl_beep: beepgrp {
 			fsl,pins = <
 				MX6ULL_PAD_SNVS_TAMPER1__GPIO5_IO01    0x10B0
+			>;
+		};
+		pinctrl_led: ledgrp {
+			fsl,pins = <
+				MX6UL_PAD_GPIO1_IO03__GPIO1_IO03    0x10B0
 			>;
 		};
 
@@ -732,7 +747,7 @@
 &tsc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_tsc>;
-	xnur-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>;
+//	xnur-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>;
 	measure-delay-time = <0xffff>;
 	pre-charge-time = <0xfff>;
 	status = "okay";

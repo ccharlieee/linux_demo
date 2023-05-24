@@ -50,19 +50,16 @@ static ssize_t demo_write(struct file *pfile, const char __user *puser, size_t c
 		return -EFAULT;
 	if(data == '0')
 		{
-			gpio_set_value(led_gpio, 0);	
-        
+			gpio_set_value(led_gpio, 0);	       
 		}
 	else
 		{
 			gpio_set_value(led_gpio, 1);
-           
 		}	
 
     printk(KERN_WARNING "%s\n",__FUNCTION__);
 	return count;
-    printk(KERN_WARNING "%s\n",__FUNCTION__);
-	return count;
+
 }
 
 struct file_operations demo_fops = {

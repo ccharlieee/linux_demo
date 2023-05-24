@@ -1,7 +1,7 @@
 KERNELDIR := /home/edu/work/git/linux_demo/kernel
 CURRENT_PATH := $(shell pwd)
 
-obj-m := platform.o
+obj-m :=  device.o  driver.o
 
 build: kernel_modules
 
