@@ -1,4 +1,4 @@
- #include <linux/types.h>
+#include <linux/types.h>
 #include <linux/kernel.h>
 #include <linux/delay.h>
 #include <linux/ide.h>
@@ -15,126 +15,127 @@
 #include <asm/uaccess.h>
 #include <asm/io.h>
 
-#define GPIOLED_CNT 1
-#define GPIOLED_NAME "gpio_led"
-#define LEDON 1
-#define LEDOFF 0 
-struct gpioled_dev{
-    dev_t devid;
-    int major;
-    int minor;
-    struct cdev cdev;
-    struct class *class;
-    struct device *device;
-    struct device_node *nd;
-    int led_gpio;
+#define DEVICE_NAME "gpio_led"
+#define BEEPOFF 0 /* 关蜂鸣器 */
+#define BEEPON 1 /* 开蜂鸣器 */
 
-};
-struct gpioled_dev gpioled;
+struct device_node *nd;
+int led_gpio;
 
-static int gpioled_open (struct inode *pinode, struct file *pfile)
+static int major = 0;
+static struct class *demo_class = NULL;
+static struct device *demo_device = NULL;
+
+static int demo_open(struct inode *pinode, struct file *pfile)
 {
-    printk(KERN_WARNING"L%d->%s()\n",__LINE__,__FUNCTION__);
-	
+	printk(KERN_WARNING "%s\n",__FUNCTION__);
 
-
-    return 0;
+	return 0;
 }
-
-static ssize_t gpioled_write (struct file *pfile, const char __user *pbuf, size_t count,loff_t *off){
+static int demo_release(struct inode *pinode, struct file *pfile)
+{
+	printk(KERN_WARNING "%s\n",__FUNCTION__);
+	return 0;
+}
+static ssize_t demo_read(struct file *pfile, char __user *puser, size_t count, loff_t *poffset)
+{
+    printk(KERN_WARNING "%s\n",__FUNCTION__);
+	return count;
+}
+static ssize_t demo_write(struct file *pfile, const char __user *puser, size_t count, loff_t *poffset)
+{
     
-    
-	int ret;
-	unsigned char databuf[1];
-	ret = copy_from_user(databuf, pbuf ,count);
-	if(ret < 0){
+	char data;
+	if(copy_from_user(&data,puser,1) != 0)
 		return -EFAULT;
-	}
-    if(databuf[0] == LEDON){
-        gpio_set_value(gpioled.led_gpio,0);
-    }
-    else{
-        gpio_set_value(gpioled.led_gpio,1);
-    }
-    
-	 
+	if(data == '0')
+		{
+			gpio_set_value(led_gpio, 0);	
+        
+		}
+	else
+		{
+			gpio_set_value(led_gpio, 1);
+           
+		}	
 
-    return 0;
+    printk(KERN_WARNING "%s\n",__FUNCTION__);
+	return count;
+    printk(KERN_WARNING "%s\n",__FUNCTION__);
+	return count;
 }
 
-static int gpioled_release (struct inode *pinode, struct file *pfile){
-    printk(KERN_WARNING"L%d->%s()\n",__LINE__,__FUNCTION__);
-
-    return 0;
-}
-static const struct file_operations gpioled_fops={
-    .owner = THIS_MODULE,
-    .open = gpioled_open,
-    .write = gpioled_write,
-    .release = gpioled_release,
+struct file_operations demo_fops = {
+.owner = THIS_MODULE,
+.open = demo_open,
+.read = demo_read,
+.write = demo_write,
+.release = demo_release,
 };
 
-static int __init led_init(void)
+static int __init demo_module_init(void)
 {
-    int ret = 0;
-    gpioled.major = 0;
-    if(gpioled.major){
-        gpioled.devid = MKDEV(gpioled.major,0);
-        register_chrdev_region(gpioled.devid,GPIOLED_CNT,GPIOLED_NAME);
-    }
-    else{
-        alloc_chrdev_region(&gpioled.devid,0,GPIOLED_CNT,GPIOLED_NAME);//0 从零开始
-        gpioled.major = MAJOR(gpioled.devid);
-        gpioled.minor = MINOR(gpioled.devid);
-    }
+	int ret = 0;
+	
+	printk(KERN_WARNING "%s\n",__FUNCTION__);
+	major = register_chrdev(major,DEVICE_NAME,&demo_fops);
+	if(major < 0)
+	{
+		ret = major;
+		goto register_chrdev_fail;
+	}
+	demo_class = class_create(THIS_MODULE,DEVICE_NAME);
+	if(IS_ERR(demo_class)){
+		ret = PTR_ERR(demo_class);
+		goto class_create_fail;
+	}
+	demo_device = device_create(demo_class,NULL,MKDEV(major,0),NULL,"gpio_led");
+	if(IS_ERR(demo_device)){
+		ret = PTR_ERR(demo_device);
+		goto device_create_fail;
+	}
 
-    gpioled.cdev.owner = THIS_MODULE;
-    cdev_init(&gpioled.cdev,&gpioled_fops);
-    cdev_add(&gpioled.cdev,gpioled.devid,GPIOLED_CNT);
-
-    gpioled.class = class_create(THIS_MODULE,GPIOLED_NAME);
-    gpioled.device = device_create(gpioled.class,NULL,gpioled.devid,NULL,GPIOLED_NAME);
-    if(IS_ERR(gpioled.device)){
-        return PTR_ERR(gpioled.device);
-    }
-
-    //获取设备节点
-    gpioled.nd = of_find_node_by_path("/gpioled");
-    if(gpioled.nd == NULL)
+    nd = of_find_node_by_path("/led");
+    if(nd == NULL)
     {
         ret = -EINVAL;
         goto fail_findnode;
     }
-    gpioled.led_gpio = of_get_named_gpio(gpioled.nd,"led-gpios",0);
-    if(gpioled.led_gpio < 0){
+    led_gpio = of_get_named_gpio(nd,"beep-gpio",0);
+    if(led_gpio < 0){
         printk("can not find led gpio\r\n");
         ret = -EINVAL;
         goto fail_findnode;
     }
-    printk("led gpio num =%d\r\n",gpioled.led_gpio);
-    gpio_request(gpioled.led_gpio,"led-gpio");
+    printk("beep gpio num =%d\r\n",led_gpio);
+    //gpio_request(gpioled.led_gpio,"led-gpio");
 
-    gpio_direction_output(gpioled.led_gpio,1); 
-    gpio_set_value(gpioled.led_gpio,0);
+    gpio_direction_output(led_gpio,0); 
+    
 
 
-    return 0;
+return 0;
+device_create_fail:
+	class_destroy(demo_class);
+class_create_fail:
+	unregister_chrdev(major,DEVICE_NAME);
+register_chrdev_fail:
+	return ret;
 fail_findnode:
     return ret;
+
 }
-
-
-static void __exit led_exit(void)
+static void __exit demo_module_exit(void)
 {
-    gpio_set_value(gpioled.led_gpio,1);
-    cdev_del(&gpioled.cdev);
-    unregister_chrdev_region(gpioled.devid,GPIOLED_CNT);
-    device_destroy(gpioled.class,gpioled.devid);
-    class_destroy(gpioled.class);
-
+	printk(KERN_WARNING "%s\n",__FUNCTION__);	
+	unregister_chrdev(major,DEVICE_NAME);
+	device_destroy(demo_class,MKDEV(major,0));
+	class_destroy(demo_class);
 }
 
-module_init(led_init);
-module_exit(led_exit);
+module_init(demo_module_init);
+module_exit(demo_module_exit);
+
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("ccharlieee");
+MODULE_AUTHOR("xiuhai.deng@sunplusapp.com");
+
