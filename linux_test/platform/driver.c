@@ -1,20 +1,27 @@
-#include <linux/module.h>
+#include <linux/types.h>
 #include <linux/kernel.h>
-#include <linux/fs.h>
+#include <linux/delay.h>
+#include <linux/ide.h>
 #include <linux/init.h>
-#include <linux/uaccess.h>
-#include <linux/io.h>
-#include <linux/slab.h>
-#include <linux/device.h>	/* class device */
-#include <linux/sched.h>		/* current */
-#include <linux/mount.h>		/* struct vfsmount */
-#include <linux/platform_device.h>
+#include <linux/module.h>
 #include <linux/errno.h>
+#include <linux/gpio.h>
+#include <linux/cdev.h>
+#include <linux/device.h>
+#include <linux/of_gpio.h>
+#include <linux/semaphore.h>
+#include <linux/timer.h>
+#include <linux/irq.h>
+#include <linux/wait.h>
+#include <linux/poll.h>
+#include <linux/fs.h>
+#include <linux/fcntl.h>
+#include <linux/platform_device.h>
 #include <asm/mach/map.h>
+#include <asm/uaccess.h>
+#include <asm/io.h>
 
 #define DEVICE_NAME "platform"
-#define LEDOFF  0
-#define LEDON   1
 
 static void __iomem *IMX6U_CCM_CCGR1;
 static void __iomem *SW_MUX_GPIO1_IO03;
@@ -124,6 +131,7 @@ static int led_probe(struct platform_device *dev)
 		ret = PTR_ERR(demo_device);
 		goto device_create_fail;
 	}
+    return 0;
 
 device_create_fail:
 	class_destroy(demo_class);

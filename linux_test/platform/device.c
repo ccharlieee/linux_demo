@@ -1,9 +1,25 @@
-#include <linux/module.h>	/* module_init */
-#include <linux/fs.h>	/* file_operations */
-#include <linux/device.h>	/* class device */
-#include <linux/sched.h>		/* current */
-#include <linux/mount.h>		/* struct vfsmount */
+#include <linux/types.h>
+#include <linux/kernel.h>
+#include <linux/delay.h>
+#include <linux/ide.h>
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/errno.h>
+#include <linux/gpio.h>
+#include <linux/cdev.h>
+#include <linux/device.h>
+#include <linux/of_gpio.h>
+#include <linux/semaphore.h>
+#include <linux/timer.h>
+#include <linux/irq.h>
+#include <linux/wait.h>
+#include <linux/poll.h>
+#include <linux/fs.h>
+#include <linux/fcntl.h>
 #include <linux/platform_device.h>
+#include <asm/mach/map.h>
+#include <asm/uaccess.h>
+#include <asm/io.h>
 
 #define DEVICE_NAME "demo_char"
 #define DEMO_PLATFORM_NAME 		"demo_platform_key"
@@ -40,7 +56,7 @@ static struct resource demo_led_resource[] = {
 		.start = GPIO1_GDIR_BASE,
 		.end = (GPIO1_GDIR_BASE + REGISTER_LENGTH - 1),
 		.flags = IORESOURCE_MEM,
-	}
+	},
 };
 
 static void demo_release(struct device *dev)
@@ -57,8 +73,6 @@ static struct platform_device device_demo_led = {
 	.dev = {
 		.release = &demo_release,
 	},
-	.num_resources = ARRAY_SIZE(demo_led_resource),
-	.resource = demo_led_resource,
 };
 
 static int __init demo_module_init(void)

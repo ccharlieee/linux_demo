@@ -1,1 +1,0 @@
-cmd_/home/edu/work/git/linux_demo/linux_test/platform/driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/edu/work/git/linux_demo/linux_test/platform/driver.ko /home/edu/work/git/linux_demo/linux_test/platform/driver.o /home/edu/work/git/linux_demo/linux_test/platform/driver.mod.o
