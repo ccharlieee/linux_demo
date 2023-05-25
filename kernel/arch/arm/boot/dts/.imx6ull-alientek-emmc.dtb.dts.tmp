@@ -1345,20 +1345,19 @@
    spi-max-frequency = <100000>;
   };
  };
-
- alphaled {
-  #address-cells = <1>;
-  #size-cells = <1>;
-  compatible = "atkalpha-led";
-  status = "okay";
-  reg = <
-   0X020C406C 0x04
-   0X020E0068 0x04
-   0X020E02F4 0x04
-   0X0209C000 0x04
-   0X0209C004 0x04
-  >;
- };
+  alphaled {
+              #address-cells = <1>;
+              #size-cells = <1>;
+             compatible = "atkalpha-led";
+          status = "okay";
+               reg = <
+                    0X020C406C 0x04
+                    0X020E0068 0x04
+     0X020E02F4 0x04
+                    0X0209C000 0x04
+                    0X0209C004 0x04
+             >;
+      };
 
  beep {
   #address-cells = <1>;
@@ -1369,6 +1368,7 @@
   beep-gpio = <&gpio5 1 0>;
   status = "okay";
  };
+
  led {
   #address-cells = <1>;
   #size-cells = <1>;
@@ -1376,6 +1376,16 @@
   pinctrl-names = "default";
   pinctrl-0 = <&pinctrl_led>;
   beep-gpio = <&gpio1 3 1>;
+  status = "okay";
+ };
+
+ key {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  compatible = "atkalpha-key";
+  pinctrl-names = "default";
+  pinctrl-0 = <&pinctrl_key>;
+  key-gpio = <&gpio1 18 1>;
   status = "okay";
  };
 
@@ -1808,6 +1818,12 @@
   pinctrl_led: ledgrp {
    fsl,pins = <
     0x0068 0x02F4 0x0000 0x5 0x0 0x10B0
+   >;
+  };
+
+  pinctrl_key: keygrp {
+   fsl,pins = <
+    0x008C 0x0318 0x0000 0x5 0x0 0xF080
    >;
   };
 
