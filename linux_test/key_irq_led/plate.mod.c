@@ -18,12 +18,16 @@ static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
 	{ 0xfa985410, __VMLINUX_SYMBOL_STR(module_layout) },
+	{ 0xf20dabd8, __VMLINUX_SYMBOL_STR(free_irq) },
+	{ 0xfe990052, __VMLINUX_SYMBOL_STR(gpio_free) },
+	{ 0xcca27eeb, __VMLINUX_SYMBOL_STR(del_timer) },
 	{ 0xe6e17706, __VMLINUX_SYMBOL_STR(device_destroy) },
 	{ 0x6bc3fbc0, __VMLINUX_SYMBOL_STR(__unregister_chrdev) },
 	{ 0xfa2bcf10, __VMLINUX_SYMBOL_STR(init_timer_key) },
 	{ 0xd6b8e852, __VMLINUX_SYMBOL_STR(request_threaded_irq) },
 	{ 0x94616f8b, __VMLINUX_SYMBOL_STR(gpiod_to_irq) },
 	{ 0xb7cfa4a8, __VMLINUX_SYMBOL_STR(gpiod_direction_input) },
+	{ 0xc61ff1f2, __VMLINUX_SYMBOL_STR(gpiod_direction_output_raw) },
 	{ 0x47229b5c, __VMLINUX_SYMBOL_STR(gpio_request) },
 	{ 0xde6fb46c, __VMLINUX_SYMBOL_STR(of_get_named_gpio_flags) },
 	{ 0xfbed6f8c, __VMLINUX_SYMBOL_STR(of_find_node_opts_by_path) },
@@ -49,4 +53,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "B1E0BA4B9926B6337AD732F");
+MODULE_INFO(srcversion, "4F41EF9610188A10B868FFA");
