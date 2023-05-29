@@ -143,6 +143,9 @@ static void __exit demo_module_exit(void)
 	unregister_chrdev(major,DEVICE_NAME);
 	device_destroy(demo_class,MKDEV(major,0));
 	class_destroy(demo_class);
+	del_timer(&timer);
+    gpio_free(key_gpio);
+    free_irq(key_irq,NULL);
 }
 
 module_init(demo_module_init);
