@@ -18,19 +18,31 @@ static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
 	{ 0xfa985410, __VMLINUX_SYMBOL_STR(module_layout) },
-	{ 0x51204841, __VMLINUX_SYMBOL_STR(platform_driver_unregister) },
-	{ 0xda113ac9, __VMLINUX_SYMBOL_STR(__platform_driver_register) },
+	{ 0x1f592b1a, __VMLINUX_SYMBOL_STR(input_free_device) },
+	{ 0xf8a905d3, __VMLINUX_SYMBOL_STR(input_unregister_device) },
+	{ 0xf20dabd8, __VMLINUX_SYMBOL_STR(free_irq) },
+	{ 0xfe990052, __VMLINUX_SYMBOL_STR(gpio_free) },
+	{ 0xcca27eeb, __VMLINUX_SYMBOL_STR(del_timer) },
+	{ 0xfa2bcf10, __VMLINUX_SYMBOL_STR(init_timer_key) },
 	{ 0xe3c07ed7, __VMLINUX_SYMBOL_STR(input_register_device) },
 	{ 0x243100ec, __VMLINUX_SYMBOL_STR(input_allocate_device) },
+	{ 0xd6b8e852, __VMLINUX_SYMBOL_STR(request_threaded_irq) },
+	{ 0x94616f8b, __VMLINUX_SYMBOL_STR(gpiod_to_irq) },
 	{ 0xb7cfa4a8, __VMLINUX_SYMBOL_STR(gpiod_direction_input) },
-	{ 0x3089e8ae, __VMLINUX_SYMBOL_STR(gpio_to_desc) },
+	{ 0xc61ff1f2, __VMLINUX_SYMBOL_STR(gpiod_direction_output_raw) },
+	{ 0x47229b5c, __VMLINUX_SYMBOL_STR(gpio_request) },
 	{ 0xde6fb46c, __VMLINUX_SYMBOL_STR(of_get_named_gpio_flags) },
 	{ 0xfbed6f8c, __VMLINUX_SYMBOL_STR(of_find_node_opts_by_path) },
-	{ 0xf8a905d3, __VMLINUX_SYMBOL_STR(input_unregister_device) },
-	{ 0xfa2a45e, __VMLINUX_SYMBOL_STR(__memzero) },
-	{ 0xfbc74f64, __VMLINUX_SYMBOL_STR(__copy_from_user) },
+	{ 0xf3bb59b5, __VMLINUX_SYMBOL_STR(__mutex_init) },
+	{ 0xc8fd727e, __VMLINUX_SYMBOL_STR(mod_timer) },
+	{ 0x7d11c268, __VMLINUX_SYMBOL_STR(jiffies) },
+	{ 0x3bd1b1f6, __VMLINUX_SYMBOL_STR(msecs_to_jiffies) },
 	{ 0xefd6cf06, __VMLINUX_SYMBOL_STR(__aeabi_unwind_cpp_pr0) },
+	{ 0x8e117d54, __VMLINUX_SYMBOL_STR(input_event) },
+	{ 0x389329b3, __VMLINUX_SYMBOL_STR(gpiod_set_raw_value) },
 	{ 0x27e1a049, __VMLINUX_SYMBOL_STR(printk) },
+	{ 0x83f62a58, __VMLINUX_SYMBOL_STR(gpiod_get_raw_value) },
+	{ 0x3089e8ae, __VMLINUX_SYMBOL_STR(gpio_to_desc) },
 };
 
 static const char __module_depends[]
@@ -39,4 +51,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "3373CBD8F562A472315FB25");
+MODULE_INFO(srcversion, "43B642ED180264A6A586B44");

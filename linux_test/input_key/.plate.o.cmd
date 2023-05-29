@@ -909,17 +909,17 @@ deps_/home/edu/work/git/linux_demo/linux_test/input_key/plate.o := \
   include/linux/gpio/consumer.h \
     $(wildcard include/config/gpio/sysfs.h) \
   include/linux/cdev.h \
+  include/linux/of_address.h \
+    $(wildcard include/config/of/address.h) \
   include/linux/of_gpio.h \
-  include/linux/poll.h \
-  include/uapi/linux/poll.h \
-  arch/arm/include/generated/asm/poll.h \
-  include/uapi/asm-generic/poll.h \
-  include/linux/platform_device.h \
-    $(wildcard include/config/suspend.h) \
-  arch/arm/include/asm/mach/map.h \
-    $(wildcard include/config/debug/ll.h) \
   include/linux/input.h \
   include/uapi/linux/input.h \
+  include/linux/of_irq.h \
+    $(wildcard include/config/ppc32.h) \
+    $(wildcard include/config/ppc/pmac.h) \
+    $(wildcard include/config/of/irq.h) \
+  arch/arm/include/asm/mach/map.h \
+    $(wildcard include/config/debug/ll.h) \
 
 /home/edu/work/git/linux_demo/linux_test/input_key/plate.o: $(deps_/home/edu/work/git/linux_demo/linux_test/input_key/plate.o)
 
