@@ -1481,6 +1481,11 @@
  pinctrl-0 = <&pinctrl_i2c1>;
  status = "okay";
 
+ ap3216c@1e {
+  compatible = "alientek,ap3216c";
+  reg = <0x1e>;
+ };
+
  mag3110@0e {
   compatible = "fsl,mag3110";
   reg = <0x0e>;
@@ -1599,8 +1604,8 @@
 
   pinctrl_flexcan2: flexcan2grp{
    fsl,pins = <
-    0x00A0 0x032C 0x0588 0x2 0x0 0x1b020
-    0x009C 0x0328 0x0000 0x2 0x0 0x1b020
+
+
    >;
   };
 
@@ -1701,8 +1706,8 @@
 
   pinctrl_uart2: uart2grp {
    fsl,pins = <
-    0x0094 0x0320 0x0000 0x0 0x0 0x1b0b1
-    0x0098 0x0324 0x062C 0x0 0x1 0x1b0b1
+
+
     0x00A8 0x0334 0x0628 0x4 0x3 0x1b0b1
     0x00A4 0x0330 0x0000 0x4 0x0 0x1b0b1
    >;
@@ -1710,8 +1715,8 @@
 
   pinctrl_uart2dte: uart2dtegrp {
    fsl,pins = <
-    0x0094 0x0320 0x062C 0x0 0x0 0x1b0b1
-    0x0098 0x0324 0x0000 0x0 0x0 0x1b0b1
+
+
     0x00A8 0x0334 0x0000 0x4 0x0 0x1b0b1
     0x00A4 0x0330 0x0628 0x4 0x2 0x1b0b1
    >;
@@ -1829,6 +1834,15 @@
    >;
   };
 
+  pinctrl_ecspi3: icm20608 {
+   fsl,pins =<
+   0x0094 0x0320 0x0000 0x5 0x0 0x10b0
+   0x0098 0x0324 0x0554 0x8 0x0 0x10b1
+   0x00A0 0x032C 0x0558 0x8 0x0 0x10b1
+   0x009C 0x0328 0x055C 0x8 0x0 0x10b1
+   >;
+  };
+
  };
 };
 
@@ -1898,21 +1912,21 @@
  status = "okay";
 
  display0: display {
-  bits-per-pixel = <16>;
+  bits-per-pixel = <24>;
   bus-width = <24>;
 
   display-timings {
    native-mode = <&timing0>;
    timing0: timing0 {
-   clock-frequency = <9200000>;
-   hactive = <480>;
-   vactive = <272>;
-   hfront-porch = <8>;
-   hback-porch = <4>;
-   hsync-len = <41>;
-   vback-porch = <2>;
-   vfront-porch = <4>;
-   vsync-len = <10>;
+   clock-frequency = <51200000>;
+   hactive = <1024>;
+   vactive = <600>;
+   hfront-porch = <160>;
+   hback-porch = <140>;
+   hsync-len = <20>;
+   vback-porch = <20>;
+   vfront-porch = <12>;
+   vsync-len = <3>;
 
    hsync-active = <0>;
    vsync-active = <0>;
@@ -2035,4 +2049,18 @@
  pinctrl-names = "default";
  pinctrl-0 = <&pinctrl_wdog>;
  fsl,wdog_b;
+};
+
+&ecspi3 {
+ fsl,spi-num-chipselects = <1>;
+ cs-gpios = <&gpio1 20 1>;
+ pinctrl-names = "default";
+ pinctrl-0 = <&pinctrl_ecspi3>;
+ status = "okay";
+
+ spidev: icm20608@0 {
+  compatible = "alintek,icm20608";
+  spi-max-frequency = <8000000>;
+  reg = <0>;
+ };
 };
